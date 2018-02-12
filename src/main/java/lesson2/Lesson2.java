@@ -1,14 +1,11 @@
-/**
- * Copyright © 2014, Oracle and/or its affiliates. All rights reserved.
- *
- * JDK 8 MOOC Lesson 2 homework
- */
 package lesson2;
-
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +23,7 @@ public class Lesson2 {
    *
    * @throws java.io.IOException
    */
-  public void runExercises() throws IOException {
+  public void runExercises() throws Exception {
     System.out.println("JDK 8 Lambdas and Streams MOOC Lesson 2");
     System.out.println("Running exercise 1 solution...");
     exercise1();
@@ -94,9 +91,9 @@ public class Lesson2 {
   /**
    * Count the number of lines in the file using the BufferedReader provided
    */
-  private void exercise4() throws IOException {
+  private void exercise4() throws Exception {
     try (BufferedReader reader = Files.newBufferedReader(
-        Paths.get("resources/SonnetI.txt"), StandardCharsets.UTF_8)) {
+            getSonnetIFilePath(), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
         long i = reader.lines().count();
         
@@ -110,9 +107,9 @@ public class Lesson2 {
    * 
    * HINT: A regular expression, WORD_REGEXP, is already defined for your use.
    */
-  private void exercise5() throws IOException {
+  private void exercise5() throws Exception {
     try (BufferedReader reader = Files.newBufferedReader(
-        Paths.get("resources/SonnetI.txt"), StandardCharsets.UTF_8)) {
+            getSonnetIFilePath(), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
         reader.lines().flatMap(l -> Stream.of(l.split(WORD_REGEXP)))
                 .distinct().forEach(System.out::println);
@@ -124,9 +121,9 @@ public class Lesson2 {
    * the file, converted to lower-case and with duplicates removed, which is
    * sorted by natural order.  Print the contents of the list.
    */
-  private void exercise6() throws IOException {
+  private void exercise6() throws Exception {
     try (BufferedReader reader = Files.newBufferedReader(
-        Paths.get("resources/SonnetI.txt"), StandardCharsets.UTF_8)) {
+            getSonnetIFilePath(), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
         reader.lines().flatMap(l -> Stream.of(l.split(WORD_REGEXP)))
                 .distinct().sorted().map(String::toLowerCase).
@@ -137,9 +134,8 @@ public class Lesson2 {
   /**
    * Modify exercise6 so that the words are sorted by length
    */
-  private void exercise7() throws IOException {
-    try (BufferedReader reader = Files.newBufferedReader(
-        Paths.get("resources/SonnetI.txt"), StandardCharsets.UTF_8)) {
+  private void exercise7() throws Exception {
+    try (BufferedReader reader = Files.newBufferedReader(getSonnetIFilePath(), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
         reader.lines().flatMap(l -> Stream.of(l.split(WORD_REGEXP)))
                 .distinct().sorted((x,y) -> x.length() - y.length()) //by lenght
@@ -154,9 +150,16 @@ public class Lesson2 {
    * @param args the command line arguments
    * @throws IOException If file access does not work
    */
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws Exception {
     Lesson2 lesson = new Lesson2();
     lesson.runExercises();
   }
+
+  private Path getSonnetIFilePath() throws Exception {
+    URL url = Thread.currentThread().getContextClassLoader().getResource("sonneti.txt");
+    return Paths.get(url.toURI());
+  }
+
+
 }
 
