@@ -1,8 +1,3 @@
-/**
- * Copyright © 2014, Oracle and/or its affiliates. All rights reserved.
- *
- * JDK 8 MOOC Lesson 1 homework
- */
 package lesson1;
 
 import java.util.ArrayList;
@@ -11,26 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * @author Speakjava (simon.ritter@oracle.com)
- */
 public class Lesson1 {
-  /**
-   * Run the exercises to ensure we got the right answers
-   */
-  public void runExercises() {
-    System.out.println("JDK 8 Lambdas and Streams MOOC Lesson 1");
-    System.out.println("Running exercise 1 solution...");
-    exercise1();
-    System.out.println("Running exercise 2 solution...");
-    exercise2();
-    System.out.println("Running exercise 3 solution...");
-    exercise3();
-    System.out.println("Running exercise 4 solution...");
-    exercise4();
-    System.out.println("Running exercise 5 solution...");
-    exercise5();
-  }
 
   /**
    * All exercises should be completed using Lambda expressions and the new
@@ -49,11 +25,7 @@ public class Lesson1 {
         "alpha", "bravo", "charlie", "delta", "echo", "foxtrot");
 
     /* YOUR CODE HERE */
-    StringBuilder sb = new StringBuilder();
-    
-    list.forEach(l -> sb.append(l.substring(0, 1)));
-    
-    System.out.println(sb.toString());
+
   }
 
   /**
@@ -66,8 +38,8 @@ public class Lesson1 {
         "alpha", "bravo", "charlie", "delta", "echo", "foxtrot"));
 
     /* YOUR CODE HERE */
-    list.removeIf(l -> l.length()%2!=0);
-    list.forEach(System.out::println);
+
+
   }
 
   /**
@@ -80,8 +52,8 @@ public class Lesson1 {
         "alpha", "bravo", "charlie", "delta", "echo", "foxtrot"));
 
     /* YOUR CODE HERE */
-    list.replaceAll(String::toUpperCase);
-    list.forEach(System.out::println);
+
+
   }
 
   /**
@@ -97,10 +69,8 @@ public class Lesson1 {
     map.put("a", 1);
 
     /* YOUR CODE HERE */
-    
-    StringBuilder sb = new StringBuilder();
-    map.entrySet().forEach( e -> sb.append(e.getKey()).append(e.getValue()));
-    System.out.println(sb.toString());
+
+
   }
 
   /**
@@ -112,11 +82,7 @@ public class Lesson1 {
     List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
     /* YOUR CODE HERE */
-    Runnable printNumbersTask = () -> {
-        list.forEach(System.out::println);
-    };
-    
-    new Thread(printNumbersTask).run();
+
   }
 
   /**
@@ -127,5 +93,22 @@ public class Lesson1 {
   public static void main(String[] args) {
     Lesson1 lesson = new Lesson1();
     lesson.runExercises();
+  }
+
+  /**
+   * Run the exercises to ensure we got the right answers
+   */
+  private void runExercises() {
+    System.out.println("JDK 8 Lambdas and Streams MOOC Lesson 1");
+    System.out.println("Running exercise 1 solution...");
+    exercise1();
+    System.out.println("Running exercise 2 solution...");
+    exercise2();
+    System.out.println("Running exercise 3 solution...");
+    exercise3();
+    System.out.println("Running exercise 4 solution...");
+    exercise4();
+    System.out.println("Running exercise 5 solution...");
+    exercise5();
   }
 }

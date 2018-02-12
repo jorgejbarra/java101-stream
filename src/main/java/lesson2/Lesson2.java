@@ -16,30 +16,9 @@ import java.util.stream.Stream;
  * @author Speakjava (simon.ritter@oracle.com)
  */
 public class Lesson2 {
+
   private static final String WORD_REGEXP = "[- .:,]+";
 
-  /**
-   * Run the exercises to ensure we got the right answers
-   *
-   * @throws java.io.IOException
-   */
-  public void runExercises() throws Exception {
-    System.out.println("JDK 8 Lambdas and Streams MOOC Lesson 2");
-    System.out.println("Running exercise 1 solution...");
-    exercise1();
-    System.out.println("Running exercise 2 solution...");
-    exercise2();
-    System.out.println("Running exercise 3 solution...");
-    exercise3();
-    System.out.println("Running exercise 4 solution...");
-    exercise4();
-    System.out.println("Running exercise 5 solution...");
-    exercise5();
-    System.out.println("Running exercise 6 solution...");
-    exercise6();
-    System.out.println("Running exercise 7 solution...");
-    exercise7();
-  }
 
   /**
    * Exercise 1
@@ -52,8 +31,7 @@ public class Lesson2 {
         "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
 
     /* YOUR CODE HERE */
-    list.stream().map(String::toLowerCase).forEach(System.out::println);
-    
+
   }
 
   /**
@@ -67,8 +45,6 @@ public class Lesson2 {
         "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
 
     /* YOUR CODE HERE */
-    list.stream().filter(s -> s.length() % 2 != 0)
-            .map(String::toLowerCase).forEach(System.out::println);
   }
 
   /**
@@ -82,23 +58,15 @@ public class Lesson2 {
         "The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog");
 
     /* YOUR CODE HERE */
-    String newStr = list.stream().skip(1).limit(3)
-            .collect(Collectors.joining("-"));
-    
-    System.out.println(newStr);
+
   }
 
   /**
    * Count the number of lines in the file using the BufferedReader provided
    */
   private void exercise4() throws Exception {
-    try (BufferedReader reader = Files.newBufferedReader(
-            getSonnetIFilePath(), StandardCharsets.UTF_8)) {
-      /* YOUR CODE HERE */
-        long i = reader.lines().count();
-        
-        System.out.println(i);
-    }
+
+
   }
   
   /**
@@ -108,12 +76,7 @@ public class Lesson2 {
    * HINT: A regular expression, WORD_REGEXP, is already defined for your use.
    */
   private void exercise5() throws Exception {
-    try (BufferedReader reader = Files.newBufferedReader(
-            getSonnetIFilePath(), StandardCharsets.UTF_8)) {
-      /* YOUR CODE HERE */
-        reader.lines().flatMap(l -> Stream.of(l.split(WORD_REGEXP)))
-                .distinct().forEach(System.out::println);
-    }
+
   }
   
   /**
@@ -122,26 +85,14 @@ public class Lesson2 {
    * sorted by natural order.  Print the contents of the list.
    */
   private void exercise6() throws Exception {
-    try (BufferedReader reader = Files.newBufferedReader(
-            getSonnetIFilePath(), StandardCharsets.UTF_8)) {
-      /* YOUR CODE HERE */
-        reader.lines().flatMap(l -> Stream.of(l.split(WORD_REGEXP)))
-                .distinct().sorted().map(String::toLowerCase).
-                forEach(System.out::println);
-    }
+
   }
   
   /**
    * Modify exercise6 so that the words are sorted by length
    */
   private void exercise7() throws Exception {
-    try (BufferedReader reader = Files.newBufferedReader(getSonnetIFilePath(), StandardCharsets.UTF_8)) {
-      /* YOUR CODE HERE */
-        reader.lines().flatMap(l -> Stream.of(l.split(WORD_REGEXP)))
-                .distinct().sorted((x,y) -> x.length() - y.length()) //by lenght
-                .map(String::toLowerCase).
-                forEach(System.out::println);
-    }
+
   }
 
   /**
@@ -161,5 +112,27 @@ public class Lesson2 {
   }
 
 
+  /**
+   * Run the exercises to ensure we got the right answers
+   *
+   * @throws java.io.IOException
+   */
+  private void runExercises() throws Exception {
+    System.out.println("JDK 8 Lambdas and Streams MOOC Lesson 2");
+    System.out.println("Running exercise 1 solution...");
+    exercise1();
+    System.out.println("Running exercise 2 solution...");
+    exercise2();
+    System.out.println("Running exercise 3 solution...");
+    exercise3();
+    System.out.println("Running exercise 4 solution...");
+    exercise4();
+    System.out.println("Running exercise 5 solution...");
+    exercise5();
+    System.out.println("Running exercise 6 solution...");
+    exercise6();
+    System.out.println("Running exercise 7 solution...");
+    exercise7();
+  }
 }
 
